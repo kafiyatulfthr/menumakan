@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/menumakan'
 db = SQLAlchemy(app)
 
 class listmenu(db.Model):
@@ -10,9 +11,17 @@ class listmenu(db.Model):
     content = db.Column(db.String(200), nullable=False)
     timing = db.Column(db.String(200), nullable=False)
     score = db.Column(db.Integer)
+    status = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
         return '<menu %r>' % self.id
+
+class status(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.String(200), nullable=False)
+
+    def __repr__(self):
+        return '<stat %r>' % self.id
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -21,7 +30,10 @@ def index():
         menu_content = request.form['content']
         meal_time = request.form['timing']
         menu_score = request.form['score']
-        new_menu = listmenu(content=menu_content, timing=meal_time, score=menu_score)
+        #status = db.select(['status'])
+        menu_status = request.form['status']
+        #menu_status= select(user_table)
+        new_menu = listmenu(content=menu_content, timing=meal_time, score=menu_score, status=menu_status)
 
         try:
             db.session.add(new_menu)
@@ -54,6 +66,7 @@ def update(id):
         menu.content = request.form['content']
         menu.timing = request.form['timing']
         menu.score = request.form['score']
+        #menu.status = request.form.getlist('status')
 
         try:
             db.session.commit()

@@ -19,9 +19,26 @@
             <label for="score">Score</label><br>
             <input type="range" id="score" name="score" min="0" max="5" value="{{menu.score}}">
             <br>
-            <input type="submit" value="Update">
+            <!--<label for="status">Status</label><br>
+            <input type="checkbox" name="status" id="status" value="{{menu.status}}" checked>{{menu.status}}
+            try aGain
+            {% for i in listmenu %}
+            <input type="checkbox" id="id_{{i.status}}" name="status" value="{{i.status}}">
+            <label for="id_{{i.status}}">{{i.status}}</label>
+            {% endfor %}-->
+            <br>
+            <input id="submitbtn" type="submit" value="Update">
             <button><a href="/">Cancel</a></button>
         </form>
     </div>
 </div>
+<script>
+    $('#active').click(function() {
+        if ($('#submitbtn').is(':disabled')) {
+    	    $('#submitbtn').removeAttr('disabled');
+            } else {
+    	$('#submitbtn').attr('disabled', 'disabled');
+        }
+    });
+</script>
 {% endblock %}
