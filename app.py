@@ -66,7 +66,7 @@ def update(id):
         menu.content = request.form['content']
         menu.timing = request.form['timing']
         menu.score = request.form['score']
-        #menu.status = request.form.getlist('status')
+        menu.status = request.form['status']
 
         try:
             db.session.commit()
@@ -81,7 +81,8 @@ def update(id):
 ####################################################################################
 @app.route('/scoring', methods=['GET'])
 def scoring():
-        menus = listmenu.query.order_by(listmenu.id).all()
+        #menus = listmenu.query.order_by(listmenu.id).all()
+        menus = listmenu.query.filter_by(status = 'Active').all()
         return render_template('scoring.html', menus=menus)
 
 @app.route('/updatescore/<int:id>', methods=['GET', 'POST'])
