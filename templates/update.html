@@ -19,12 +19,8 @@
             <label for="score">Score</label><br>
             <input type="range" id="score" name="score" min="0" max="5" value="{{menu.score}}">
             <br>
-            Status:
-            <select name= status>
-                <option value= "{{menu.status}}" SELECTED disabled>{{menu.status}}</option>
-                <option value= "Active">Active</option>
-                <option value= "Non Active">Non Active</option>
-            </select>
+            <label for="status">Status</label><br>
+            <input type="text" id="status" name="status" value="{{menu.status}}">
             <br><br>
             <input id="submitbtn" type="submit" value="Update">
             <button><a href="/">Cancel</a></button>

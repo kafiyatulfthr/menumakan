@@ -18,14 +18,10 @@
             <br>
             <input type="range" id="score" name="score" min="0" max="5" value="0" hidden>
             <br>
-            <!--<SELECT id="status" name="status">
-                {% for j in status %}
-                    <OPTION value={{j[0]}}>{{j[1]}}</OPTION>
-                {% endfor %}-->
-            <input type="radio" id="active" name="status" value="Active" checked>
-            <label for="active">Active</label>
-            <input type="radio" id="inactive" name="status" value="Non Active">
-            <label for="inactive">Non Active</label>
+            <input type="radio" name="status" value="Active" checked>
+            <label>Active</label>
+            <input type="radio" name="status" value="Non Active">
+            <label>Non Active</label>
             <br><br>
             <input type="submit" value="Add menu">
         </form>
