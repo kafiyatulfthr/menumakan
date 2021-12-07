@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
+<div class="content split left">
     <h1 style="text-align: center">Canteen Menu</h1>
-    <button><a href="/scoring">Scoring</a></button>
     <div class="form">
         <form action="/" method="POST">
+            <h4>Input New Menu</h4>
             <label for="content">Menu</label><br>
             <input type="text" name="content" id="content" required>
             <br>
@@ -25,13 +25,23 @@
             <br><br>
             <input type="submit" value="Add menu">
         </form>
+
+            <br><br>
+            <a href="/uploadfiles">Upload Your File</a>
+        </form>
     </div>
+</div>
+
+<div class="content split right">
+    <h1 style="text-align: center">List of Menu</h1>
+    <button><a href="/scoring">Scoring</a></button><br><br>
+
     {% if menus|length < 1 %}
     <h4 style="text-align: center">There are no menus. Create one below!</h4>
     {% else %}
-    <h4>List of Menu</h4>
     <table>
         <tr>
+            <th>ID Menu</th>
             <th>Status</th>
             <th>Menu</th>
             <th>Timing</th>
@@ -40,6 +50,7 @@
         </tr>
         {% for menu in menus %}
             <tr>
+                <td>{{ menu.id }}</td>
                 <td>{{ menu.status }}</td>
                 <td>{{ menu.content }}</td>
                 <td>{{ menu.timing }}</td>

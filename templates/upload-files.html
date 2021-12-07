@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Upload Files</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Upload File</h1>
+
+    <div class="form">
+        <form  method="POST" action="/uploadfiles" enctype="multipart/form-data">
+            Upload a csv file: <input type='file' name='file'>
+            <input type='submit' value='Upload'>
+          </form>
+    </div>
+</div>
+{% endblock %}

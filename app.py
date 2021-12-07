@@ -1,13 +1,12 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, make_response
 from flask_sqlalchemy import SQLAlchemy
+import csv
+from io import TextIOWrapper
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/menumakan'
 db = SQLAlchemy(app)
-
-status = [{'status' : 'Active'},
-          {'status' : 'Non Active'}]
 
 class listmenu(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -18,6 +17,9 @@ class listmenu(db.Model):
 
     def __repr__(self):
         return '<menu %r>' % self.id
+
+def transform(text_file_contents):
+    return text_file_contents.replace("=", ",")
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -40,6 +42,21 @@ def index():
         menus = listmenu.query.order_by(listmenu.id).all()
         return render_template('index.html', menus=menus)
 
+###############################################################
+@app.route('/uploadfiles', methods=['POST', 'GET'])
+# Get the uploaded files
+def uploadfiles():
+    if request.method == 'POST':
+        csv_file = request.files['file']
+        csv_file = TextIOWrapper(csv_file, encoding='utf-8')
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        for row in csv_reader:
+            new_menu = listmenu(content=row[0], timing=row[1], score=row[2], status=row[3])
+            db.session.add(new_menu)
+            db.session.commit()
+        return redirect('/')
+    return render_template('upload-files.html')
+################################################################
 
 @app.route('/delete/<int:id>')
 def delete(id):

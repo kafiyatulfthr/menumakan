@@ -97,3 +97,29 @@ td {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  /*split*/
+  /* Split the screen in half */
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  padding: 30px;
+  background-color: #fff;
+}
+
+/* Control the right side */
+.right {
+  padding: 30px;
+  right: 0;
+  background-color: #fff;
+}
