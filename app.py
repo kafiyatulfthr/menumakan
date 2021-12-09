@@ -1,7 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect, make_response
+from MySQLdb.cursors import Cursor
+from flask import Flask, render_template, url_for, request, redirect, make_response, Response
 from flask_sqlalchemy import SQLAlchemy
 import csv
 from io import TextIOWrapper
+from io import StringIO
+import io
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -92,7 +95,6 @@ def update(id):
 ####################################################################################
 @app.route('/scoring', methods=['GET'])
 def scoring():
-        #menus = listmenu.query.order_by(listmenu.id).all()
         menus = listmenu.query.filter_by(status = 'Active').all()
         return render_template('scoring.html', menus=menus)
 
@@ -111,6 +113,26 @@ def updatescore(id):
 
     else:
         return render_template('score_update.html', menu=menu)
+
+########################################################################
+#Download Report to CSV
+@app.route('/download')
+def download():
+    menu = db.session.query(listmenu.id, listmenu.content, listmenu.timing, listmenu.score, listmenu.status)
+    
+    output = io.StringIO()
+    writer = csv.writer(output)
+    
+    line=['id', 'menu', 'timing', 'score', 'status']
+    #line = ['id, menu, timing, score, status'] #header pakai koma
+    writer.writerow(line)
+    
+    for row in menu:
+        writer.writerow(row)
+    
+    output.seek(0)
+    
+    return Response(output, mimetype="text/csv", headers={"Content-Disposition":"attachment;filename=data_makan.csv"})
 
 if __name__ == "__main__":
     app.run(debug=True)
