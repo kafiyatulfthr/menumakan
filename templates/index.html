@@ -44,7 +44,6 @@
     {% else %}
     <table>
         <tr>
-            <th>ID Menu</th>
             <th>Status</th>
             <th>Menu</th>
             <th>Timing</th>
@@ -53,7 +52,6 @@
         </tr>
         {% for menu in menus %}
             <tr>
-                <td>{{ menu.id }}</td>
                 <td>{{ menu.status }}</td>
                 <td>{{ menu.content }}</td>
                 <td>{{ menu.timing }}</td>
