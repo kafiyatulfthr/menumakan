@@ -5,22 +5,23 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Update Score</h1>
-
-    <div class="form">
-        <form action="/updatescore/{{menu.id}}" method="POST">
-            <label for="content">Menu</label><br>
-            <input type="text" name="content" id="content" value="{{menu.content}}" disabled>
-            <br>
-            <label for="timing">Time</label><br>
-            <input type="text" name="timing" id="timing" value="{{menu.timing}}" disabled>
-            <br>
-            <label for="score">Score</label><br>
-            <input type="range" id="score" name="score" min="0" max="5" value="{{menu.score}}">
-            <br><input type="submit" value="Save">
-            <button><a href="/scoring">Cancel</a></button>
-        </form>
+<div class="container"><br><br><br><br>
+    <div class="card form-control">
+        <div class="card-body p-3">
+            <h3 style="text-align: center">Update Score</h3>
+            <form action="/updatescore/{{menu.id}}" method="POST">
+                <label for="content">Menu</label><br>
+                <input class="form-control" type="text" name="content" id="content" value="{{menu.content}}" disabled>
+                <br>
+                <label for="timing">Time</label><br>
+                <input class="form-control" type="text" name="timing" id="timing" value="{{menu.timing}}" disabled>
+                <br>
+                <label for="score">Score</label><br>
+                <input class="form-control" type="range" id="score" name="score" min="0" max="5" value="{{menu.score}}">
+                <br><input class="btn bg-gradient-dark btn-outline-dark" type="submit" value="Save">
+                <button class="btn btn-outline-dark"><a href="/scoring">Cancel</a></button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
