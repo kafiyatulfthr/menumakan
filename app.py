@@ -61,7 +61,7 @@ def uploadfiles():
             db.session.add(new_menu)
             db.session.commit()
         return redirect('/')
-    return render_template('upload-files.html')
+    return render_template('index.html')
 
 ################################################################
 # DELETE menu
@@ -85,7 +85,7 @@ def update(id):
     if request.method == 'POST':
         menu.content = request.form['content']
         menu.timing = request.form['timing']
-        menu.score = request.form['score']
+        #menu.score = request.form['score']
         menu.status = request.form['status']
 
         try:
@@ -119,6 +119,13 @@ def updatescore(id):
 
     else:
         return render_template('score_update.html', menu=menu)
+
+########################################################################
+#Report
+@app.route('/report')
+def report():
+    menus = listmenu.query.order_by(listmenu.id).all()
+    return render_template('report.html', menus=menus)
 
 ########################################################################
 #WRITE database into a file
