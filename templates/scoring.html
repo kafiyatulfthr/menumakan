@@ -5,29 +5,29 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Scoring</h1>
-    <button><a href="/">Administrator</a></button>
-
-    <h4>List of Menu You Need to See</h4>
-    <table>
-        <tr>
-            <th>Menu</th>
-            <th>Timing</th>
-            <th>Score</th>
-            <th>Actions</th>
-        </tr>
-        {% for menu in menus %}
-            <tr>
-                <td>{{ menu.content }}</td>
-                <td>{{ menu.timing }}</td>
-                <td>{{ menu.score }}</td>
-                <td>
-                    <a href="/updatescore/{{menu.id}}">Score</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-
+<div class="container"><br><br><br><br>
+    <div class="card form-control">
+        <div class="card-body p-3">
+            <h3 style="text-align: center">Scoring</h3>
+            <table class="table">
+                <tr>
+                    <th>Menu</th>
+                    <th>Timing</th>
+                    <th>Score</th>
+                    <th>Actions</th>
+                </tr>
+                {% for menu in menus %}
+                    <tr>
+                        <td>{{ menu.content }}</td>
+                        <td>{{ menu.timing }}</td>
+                        <td>{{ menu.score }}</td>
+                        <td>
+                            <a class ="btn badge" href="/updatescore/{{menu.id}}">Give a Score</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
 {% endblock %}
