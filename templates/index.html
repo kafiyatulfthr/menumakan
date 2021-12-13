@@ -5,67 +5,71 @@
 {% endblock %}
 
 {% block body %}
-<div class="content split left">
-    <h1 style="text-align: center">Canteen Menu</h1>
-    <div class="form">
-        <form action="/" method="POST">
-            <h4>Input New Menu</h4>
-            <label for="content">Menu</label><br>
-            <input type="text" name="content" id="content" required>
-            <br>
-            <label for="timing">Time</label><br>
-            <input type="text" name="timing" id="timing" required>
-            <br>
-            <input type="range" id="score" name="score" min="0" max="5" value="0" hidden>
-            <br>
-            <input type="radio" name="status" value="Active" checked>
-            <label>Active</label>
-            <input type="radio" name="status" value="Non Active">
-            <label>Non Active</label>
-            <br><br>
-            <input type="submit" value="Add menu">
-        </form>
 
-        <p>
-            <h4>Or</h4>
-            <a href="/uploadfiles">Upload Your File</a>
-        </p>
 
-        </form>
+    <div class="container"><br><br><br><br>
+        <div class="card form-control">
+            <div class="card-body p-3">
+                <div class="row">
+                    <div class="col-6">
+                        <form action="/" method="POST">
+                            <h4>Input New Menu</h4>
+                                <label for="content">Menu</label><br>
+                                    <input class="form-control" type="text" name="content" id="content" required>
+                                    <br>
+                                <label for="timing">Time</label><br>
+                                    <input class="form-control" type="text" name="timing" id="timing" required>
+                                    <br>
+                                    <input type="range" id="score" name="score" min="0" max="5" value="0" hidden>
+                                    <br>
+                                    <input type="radio" name="status" value="Active" checked>
+                                <label>Active</label>
+                                    <input type="radio" name="status" value="Non Active">
+                                <label>Non Active</label>
+                                    <br><br>
+                                    <input class="btn bg-gradient-dark btn-outline-dark" type="submit" value="Add menu">
+                        </form>
+                    </div>
+                    <div class="col-6">
+                        <form  method="POST" action="/uploadfiles" enctype="multipart/form-data">
+                            <h4>Or Upload CSV File</h4><br>
+                            <input class="btn" type='file' name='file'>
+                            <p><input class="btn bg-gradient-dark btn-outline-dark" type='submit' value='Upload'></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="content split right">
-    <h1 style="text-align: center">List of Menu</h1>
-    <button><a href="/scoring">Scoring</a></button><br><br>
 
-    {% if menus|length < 1 %}
-    <h4 style="text-align: center">There are no menus. Create one below!</h4>
-    {% else %}
-    <table>
-        <tr>
-            <th>Status</th>
-            <th>Menu</th>
-            <th>Timing</th>
-            <th>Score</th>
-            <th>Actions</th>
-        </tr>
-        {% for menu in menus %}
-            <tr>
-                <td>{{ menu.status }}</td>
-                <td>{{ menu.content }}</td>
-                <td>{{ menu.timing }}</td>
-                <td>{{ menu.score }}</td>
-                <td>
-                    <a href="/update/{{menu.id}}">Update</a>
-                    <a href="/delete/{{menu.id}}">Delete</a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    {% endif %}
-    <p>
-        <button><a href="/download">Download Report</a></button>
-    </p>
+<div class="container"><br>
+    <div class="card">
+        <div class="card-body p-3">
+            {% if menus|length < 1 %}
+            <h4 style="text-align: center">There are no menus. Create one below!</h4>
+            {% else %}
+            <table class="table">
+                <tr>
+                    <th>Status</th>
+                    <th>Menu</th>
+                    <th>Timing</th>
+                    <th>Actions</th>
+                </tr>
+                {% for menu in menus %}
+                    <tr>
+                        <td>{{ menu.status }}</td>
+                        <td>{{ menu.content }}</td>
+                        <td>{{ menu.timing }}</td>
+                        <td>
+                            <a class="btn badge" href="/update/{{menu.id}}">Update</a>
+                            <a class="btn badge" href="/delete/{{menu.id}}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
 </div>
 {% endblock %}
