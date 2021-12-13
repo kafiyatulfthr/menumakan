@@ -5,35 +5,25 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Update menu</h1>
-
-    <div class="form">
-        <form action="/update/{{menu.id}}" method="POST">
-            <label for="content">Menu</label><br>
-            <input type="text" name="content" id="content" value="{{menu.content}}">
-            <br>
-            <label for="timing">Time</label><br>
-            <input type="text" name="timing" id="timing" value="{{menu.timing}}">
-            <br>
-            <label for="score">Score</label><br>
-            <input type="range" id="score" name="score" min="0" max="5" value="{{menu.score}}">
-            <br>
-            <label for="status">Status</label><br>
-            <input type="text" id="status" name="status" value="{{menu.status}}">
-            <br><br>
-            <input id="submitbtn" type="submit" value="Update">
-            <button><a href="/">Cancel</a></button>
-        </form>
+<div class="container"><br><br><br><br>
+    <div class="card form-control">
+        <div class="card-body p-3">
+            <h3 style="text-align: center">Update</h3>
+            <form action="/update/{{menu.id}}" method="POST">
+                <label for="content">Menu</label><br>
+                <input class="form-control" type="text" name="content" id="content" value="{{menu.content}}">
+                <br>
+                <label for="timing">Time</label><br>
+                <input class="form-control" type="text" name="timing" id="timing" value="{{menu.timing}}">
+                <br>
+                
+                <label for="status">Status</label><br>
+                <input class="form-control" type="text" id="status" name="status" value="{{menu.status}}">
+                <br><br>
+                <input class="btn bg-gradient-dark btn-outline-dark" id="submitbtn" type="submit" value="Update">
+                <button class="btn btn-outline-dark"><a href="/">Cancel</a></button>
+            </form>
+        </div>
     </div>
 </div>
-<script>
-    $('#active').click(function() {
-        if ($('#submitbtn').is(':disabled')) {
-    	    $('#submitbtn').removeAttr('disabled');
-            } else {
-    	$('#submitbtn').attr('disabled', 'disabled');
-        }
-    });
-</script>
 {% endblock %}
